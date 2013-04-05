@@ -25,12 +25,12 @@ Feature: Handle various types of connection error
       """
 
   Scenario: No servers
-     When check-site is run with config "default"
-      And the message should be "Site CRITICAL: unable to resolve hostname"
-      And the status should be 2
+    When check-site is run with config "default"
+    And the message should be "Site CRITICAL: unable to resolve hostname"
+    And the status should be 2
 
   Scenario: Connection refused
     Given one server which responds in 0 seconds
-     When check-site is run with config "wrong-port"
-     Then the message should be "Site CRITICAL: 1 hosts found, 1 uncontactable"
-      And the status should be 2
+    When check-site is run with config "wrong-port"
+    Then the message should be "Site CRITICAL: 1 hosts found, 1 uncontactable"
+    And the status should be 2

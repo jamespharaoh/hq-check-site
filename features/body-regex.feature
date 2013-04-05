@@ -15,15 +15,15 @@ Feature: Check for regex in HTTP response
 
   Scenario: Body contains regex
     Given one server which responds with "-yes-"
-     When check-site is run with config "regex"
-     Then all servers should receive page requests
-      And the message should be "Site OK: 1 hosts found, 0.0s time"
-      And the status should be 0
+    When check-site is run with config "regex"
+    Then all servers should receive page requests
+    And the message should be "Site OK: 1 hosts found, 0.0s time"
+    And the status should be 0
 
   Scenario: Body does not contain regex
     Given one server which responds with "-yes-"
-      And one server which responds with "-no-"
-     When check-site is run with config "regex"
-     Then all servers should receive page requests
-      And the message should be "Site CRITICAL: 2 hosts found, 1 mismatches, 0.0s time"
-      And the status should be 2
+    And one server which responds with "-no-"
+    When check-site is run with config "regex"
+    Then all servers should receive page requests
+    And the message should be "Site CRITICAL: 2 hosts found, 1 mismatches, 0.0s time"
+    And the status should be 2
