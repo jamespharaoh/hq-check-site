@@ -12,12 +12,6 @@ module HQ
 module CheckSite
 class Script < Tools::CheckScript
 
-	# custom http class allows us to connect to a different address
-
-	class CustomHTTP < Net::HTTP
-		attr_accessor :conn_address
-	end
-
 	def initialize
 		super
 		@name = "Site"
@@ -122,8 +116,13 @@ class Script < Tools::CheckScript
 
 			# open http connection
 
-			http = CustomHTTP.new @base_url.host, @base_url.port
-			http.conn_address = address
+			http =
+				Net::HTTP.new \
+					@base_url.host,
+					@base_url.port,
+					address,
+					@base_url.port
+
 			http.open_timeout = @timeout_time
 			http.read_timeout = @timeout_time
 			http.use_ssl = @base_url.scheme == "https"

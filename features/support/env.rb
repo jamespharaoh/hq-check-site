@@ -11,6 +11,8 @@ $web_config = {
 	:DoNotReverseLookup => true,
 }
 
+$servers = {}
+
 $web_server =
 	WEBrick::HTTPServer.new \
 		$web_config
