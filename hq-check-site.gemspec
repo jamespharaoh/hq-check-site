@@ -13,7 +13,7 @@ Gem::Specification.new do
 	|spec|
 
 	spec.name = hq_project_name
-	spec.version = "0.0.0"
+	spec.version = "0.1.0"
 	spec.platform = Gem::Platform::RUBY
 	spec.authors = [ "James Pharaoh" ]
 	spec.email = [ "james@phsys.co.uk" ]
