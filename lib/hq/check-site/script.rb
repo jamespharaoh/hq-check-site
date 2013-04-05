@@ -12,6 +12,35 @@ module HQ
 module CheckSite
 class Script < Tools::CheckScript
 
+	# this hack allows us to make Net::HTTP connect to a specific address, while
+	# using another address for other purposes, namely the host header and the
+	# ssl certificate verification (i am not proud of this)
+
+	# basically, we hijack the call to TCPSocket.open from Net::HTTP.connect,
+	# and modify the first parameter (the address) to the value provided as
+	# override_address
+
+	class CustomHTTP < Net::HTTP
+		attr_writer :override_address
+		module CustomSocket
+			def self.override_address= arg
+				@override_address = arg
+			end
+			def self.open address, *args
+				return TCPSocket.open @override_address, *args
+			end
+		end
+		def connect *args
+			begin
+				Net::HTTP.const_set "TCPSocket", CustomSocket
+				CustomSocket.override_address = @override_address
+				return super *args
+			ensure
+				Net::HTTP.send :remove_const, "TCPSocket"
+			end
+		end
+	end
+
 	def initialize
 		super
 		@name = "Site"
@@ -117,11 +146,11 @@ class Script < Tools::CheckScript
 			# open http connection
 
 			http =
-				Net::HTTP.new \
+				CustomHTTP.new \
 					@base_url.host,
-					@base_url.port,
-					address,
 					@base_url.port
+
+			http.override_address = address
 
 			http.open_timeout = @timeout_time
 			http.read_timeout = @timeout_time
