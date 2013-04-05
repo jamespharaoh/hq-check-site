@@ -176,7 +176,7 @@ class Script < Tools::CheckScript
 				raise "error"
 			end
 
-		# set headers
+		# set standard headers
 
 		req["host"] = @base_url.host
 		req["user-agent"] = "hq check-site"
@@ -187,6 +187,13 @@ class Script < Tools::CheckScript
 					|name, value|
 					"#{name}=#{value}"
 				}.join ", "
+		end
+
+		# set custom headers
+
+		request_elem.find("header").each do
+			|header_elem|
+			req[header_elem["name"]] = header_elem["value"]
 		end
 
 		# set http auth

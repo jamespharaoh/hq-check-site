@@ -69,6 +69,23 @@ Given /^one server which requires form based login with "([^"]*)" and "([^"]*)"$
 
 end
 
+Given /^one server which requires header based login$/ do
+
+	server = {
+		address: "127.0.1.#{$servers.size}",
+		request_count: 0,
+		response_code: "200",
+		response_time: 0,
+		response_body: "",
+		auth_method: :headers,
+		auth_username: "USER",
+		auth_password: "PASS",
+	}
+
+	$servers[server[:address]] = server
+
+end
+
 When /^check\-site is run with config "([^"]*)"$/ do
 	|config_name|
 

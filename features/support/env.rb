@@ -63,11 +63,13 @@ $web_server.mount_proc "/page" do
 	server[:request_count] += 1
 
 	if server[:auth_method] == :http
+
 		WEBrick::HTTPAuth.basic_auth request, response, "Realm" do
 			|user, pass|
 			user == server[:auth_username] &&
 			pass == server[:auth_password]
 		end
+
 	end
 
 	if server[:auth_method] == :form
@@ -83,6 +85,13 @@ $web_server.mount_proc "/page" do
 
 		raise "not logged in" \
 			unless session_id = server[:session_id]
+
+	end
+
+	if server[:auth_method] == :headers
+
+		raise "username" unless request["username"] == "USER"
+		raise "password" unless request["password"] == "PASS"
 
 	end
 
