@@ -95,7 +95,8 @@ class Script < Tools::CheckScript
 		@successes = 0
 		@failures = 0
 		@mismatches = 0
-		@error_codes = Set.new
+		@error_codes = []
+		@report_error = nil
 
 		addresses.each do
 			|address|
@@ -115,7 +116,7 @@ class Script < Tools::CheckScript
 			critical "#{@failures} uncontactable" \
 				if @failures > 0
 
-			critical "#{errors} errors (#{@error_codes.to_a.join(",")})" \
+			critical "#{errors} errors (#{@error_codes.uniq.sort.join ","})" \
 				if errors > 0
 
 			critical "#{@mismatches} mismatches" \
@@ -131,6 +132,10 @@ class Script < Tools::CheckScript
 					message "#{@worst}s time"
 				end
 
+			end
+
+			if @report_error != nil
+				message "response '#{@report_error}'"
 			end
 
 		end
@@ -273,6 +278,14 @@ class Script < Tools::CheckScript
 		if res.code != "200"
 
 			debug "EXPECTED response code 200"
+
+			if @report_error == nil &&
+				res.body =~ /#{response_elem["report-error"]}/
+
+				@report_error = $1
+
+			end
+
 			@error_codes << res.code
 			return false
 

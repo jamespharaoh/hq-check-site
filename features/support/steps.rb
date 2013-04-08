@@ -33,6 +33,21 @@ Given /^(?:one|another) server which responds with "(.*?)"$/ do
 
 end
 
+Given /^(?:one|another) server which responds with (\d+) "(.*?)"$/ do
+	|status_str, response_str|
+
+	server = {
+		address: "127.0.1.#{$servers.size}",
+		request_count: 0,
+		response_code: status_str,
+		response_time: 0,
+		response_body: response_str,
+	}
+
+	$servers[server[:address]] = server
+
+end
+
 Given /^(?:one|another) server which requires username "([^"]*)" and password "([^"]+)"$/ do
 	|username, password|
 
