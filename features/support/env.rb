@@ -4,6 +4,8 @@ require "xml"
 
 require "hq/check-site/script"
 
+$mutex = Mutex.new
+
 $web_config = {
 	:Port => 10000 + rand(55535),
 	:AccessLog => [],
@@ -12,6 +14,24 @@ $web_config = {
 }
 
 $servers = {}
+
+# assign a unique ip address to each server
+
+$next_server_num = 256
+
+def next_server_num
+	ret = $next_server_num
+	$next_server_num += 1
+	return ret
+end
+
+def next_server_ip
+	num = next_server_num
+	high_byte = num / 256
+	low_byte = num % 256
+	ip_address = "127.0.#{high_byte}.#{low_byte}"
+	return ip_address
+end
 
 $web_server =
 	WEBrick::HTTPServer.new \
@@ -97,10 +117,10 @@ $web_server.mount_proc "/page" do
 
 	end
 
+	$time += server[:response_time]
+
 	response.status = server[:response_code]
 	response.body = server[:response_body]
-
-	$time += server[:response_time]
 
 end
 

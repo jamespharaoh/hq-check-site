@@ -7,7 +7,7 @@ Given /^(?:one|another) server which responds in (\d+) seconds?$/ do
 	|time_str|
 
 	server = {
-		address: "127.0.1.#{$servers.size}",
+		address: next_server_ip,
 		request_count: 0,
 		response_code: "200",
 		response_time: time_str.to_i,
@@ -22,7 +22,7 @@ Given /^(?:one|another) server which responds with "(.*?)"$/ do
 	|response_str|
 
 	server = {
-		address: "127.0.1.#{$servers.size}",
+		address: next_server_ip,
 		request_count: 0,
 		response_code: "200",
 		response_time: 0,
@@ -37,7 +37,7 @@ Given /^(?:one|another) server which responds with (\d+) "(.*?)"$/ do
 	|status_str, response_str|
 
 	server = {
-		address: "127.0.1.#{$servers.size}",
+		address: next_server_ip,
 		request_count: 0,
 		response_code: status_str,
 		response_time: 0,
@@ -52,7 +52,7 @@ Given /^(?:one|another) server which requires username "([^"]*)" and password "(
 	|username, password|
 
 	server = {
-		address: "127.0.1.#{$servers.size}",
+		address: next_server_ip,
 		request_count: 0,
 		response_code: "200",
 		response_time: 0,
@@ -70,7 +70,7 @@ Given /^one server which requires form based login with "([^"]*)" and "([^"]*)"$
 	|username, password|
 
 	server = {
-		address: "127.0.1.#{$servers.size}",
+		address: next_server_ip,
 		request_count: 0,
 		response_code: "200",
 		response_time: 0,
@@ -87,7 +87,7 @@ end
 Given /^one server which requires header based login$/ do
 
 	server = {
-		address: "127.0.1.#{$servers.size}",
+		address: next_server_ip,
 		request_count: 0,
 		response_code: "200",
 		response_time: 0,
