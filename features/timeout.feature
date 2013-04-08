@@ -4,24 +4,24 @@ Feature: Handle timeout correctly
 
     Given a config "default":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request path="/page"/>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request path="/page"/>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
     Given a config "timeout":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="0"/>
-          <step name="page">
-            <request path="/page"/>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="0"/>
+        <step name="page">
+          <request path="/page"/>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
   Scenario: Timeout does not expire

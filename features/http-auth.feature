@@ -4,13 +4,13 @@ Feature: Supply credentials via HTTP authentication
 
     Given a config "http-auth":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request path="/page" username="USER" password="PASS"/>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request path="/page" username="USER" password="PASS"/>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
   Scenario: Username and password are correct

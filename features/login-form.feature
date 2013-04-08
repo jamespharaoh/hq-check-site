@@ -4,20 +4,20 @@ Feature: Log in via an HTML form
 
     Given a config "form-auth":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="login">
-            <request path="/login" method="post">
-              <param name="username" value="USER"/>
-              <param name="password" value="PASS"/>
-            </request>
-            <response/>
-          </step>
-          <step name="page">
-            <request path="/page" username="USER" password="PASS"/>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="login">
+          <request path="/login" method="post">
+            <param name="username" value="USER"/>
+            <param name="password" value="PASS"/>
+          </request>
+          <response/>
+        </step>
+        <step name="page">
+          <request path="/page" username="USER" password="PASS"/>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
   Scenario: Form based login

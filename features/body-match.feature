@@ -4,13 +4,13 @@ Feature: Check for regex in HTTP response
 
     Given a config "regex":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request path="/page"/>
-            <response body-regex="y+e+s+"/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request path="/page"/>
+          <response body-regex="y+e+s+"/>
+        </step>
+      </check-site-script>
       """
 
   Scenario: Body contains regex

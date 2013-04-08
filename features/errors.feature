@@ -4,24 +4,24 @@ Feature: Handle various types of connection error
 
     Given a config "default":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request path="/page"/>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request path="/page"/>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
     Given a config "wrong-port":
       """
-        <check-site-script base-url="http://hostname:65535">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request path="/path"/>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:65535">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request path="/path"/>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
   Scenario: No servers

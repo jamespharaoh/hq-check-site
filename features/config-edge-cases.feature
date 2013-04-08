@@ -4,13 +4,13 @@ Feature: Function correctly in edge cases based on config file
 
     Given a config "no-path":
       """
-        <check-site-script base-url="http://hostname:${port}/page">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request/>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}/page">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request/>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
   Scenario: No path specified

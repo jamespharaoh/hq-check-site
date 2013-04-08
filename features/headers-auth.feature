@@ -4,27 +4,27 @@ Feature: Authenticate via custom HTTP headers
 
     Given a config "default":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request path="/page"/>
-            <response/>
-          </step>
-        </check-site-script>
-     """
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request path="/page"/>
+          <response/>
+        </step>
+      </check-site-script>
+      """
 
     Given a config "headers-auth":
       """
-        <check-site-script base-url="http://hostname:${port}">
-          <timings warning="2" critical="4" timeout="10"/>
-          <step name="page">
-            <request path="/page">
-              <header name="username" value="USER"/>
-              <header name="password" value="PASS"/>
-            </request>
-            <response/>
-          </step>
-        </check-site-script>
+      <check-site-script base-url="http://hostname:${port}">
+        <timings warning="2" critical="4" timeout="10"/>
+        <step name="page">
+          <request path="/page">
+            <header name="username" value="USER"/>
+            <header name="password" value="PASS"/>
+          </request>
+          <response/>
+        </step>
+      </check-site-script>
       """
 
   Scenario: Form based login success
