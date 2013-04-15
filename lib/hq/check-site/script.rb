@@ -140,6 +140,19 @@ class Script < Tools::CheckScript
 
 		end
 
+		if @worst
+
+			performance \
+				"time",
+				@worst,
+				:units => "s",
+				:warning => @warning_time,
+				:critical => @critical_time,
+				:minimum => 0.0,
+				:maximum => @timeout_time
+
+		end
+
 	end
 
 	def check_address address

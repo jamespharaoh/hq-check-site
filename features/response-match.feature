@@ -17,7 +17,7 @@ Feature: Check for regex in HTTP response
     Given one server which responds with "-yes-"
     When check-site is run with config "regex"
     Then all servers should receive page requests
-    And the message should be "Site OK: 1 hosts found, 0.0s time"
+    And the message should be "Site OK: 1 hosts found, 0.0s time | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 0
 
   Scenario: Body does not contain regex
@@ -25,5 +25,5 @@ Feature: Check for regex in HTTP response
     And one server which responds with "-no-"
     When check-site is run with config "regex"
     Then all servers should receive page requests
-    And the message should be "Site CRITICAL: 2 hosts found, 1 mismatches, 0.0s time"
+    And the message should be "Site CRITICAL: 2 hosts found, 1 mismatches, 0.0s time | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 2

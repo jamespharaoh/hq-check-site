@@ -24,5 +24,5 @@ Feature: Log in via an HTML form
     Given one server which requires form based login with "USER" and "PASS"
     When check-site is run with config "form-auth"
     Then all servers should receive page requests
-    And the message should be "Site OK: 1 hosts found, 0.0s time"
+    And the message should be "Site OK: 1 hosts found, 0.0s time | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 0

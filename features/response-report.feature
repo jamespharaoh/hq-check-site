@@ -21,7 +21,7 @@ Feature: Check for regex in HTTP response
     When check-site is run with config "report"
 
     Then all servers should receive page requests
-    And the message should be "Site CRITICAL: 2 hosts found, 1 errors (500), 0.0s time"
+    And the message should be "Site CRITICAL: 2 hosts found, 1 errors (500), 0.0s time | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 2
 
   Scenario: One server to report
@@ -34,5 +34,5 @@ Feature: Check for regex in HTTP response
     When check-site is run with config "report"
 
     Then all servers should receive page requests
-    And the message should be "Site CRITICAL: 4 hosts found, 3 errors (500), 0.0s time, response 'def'"
+    And the message should be "Site CRITICAL: 4 hosts found, 3 errors (500), 0.0s time, response 'def' | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 2

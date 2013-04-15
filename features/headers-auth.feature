@@ -27,16 +27,16 @@ Feature: Authenticate via custom HTTP headers
       </check-site-script>
       """
 
-  Scenario: Form based login success
+  Scenario: HTTP auth success
     Given one server which requires header based login
     When check-site is run with config "headers-auth"
     Then all servers should receive page requests
-    And the message should be "Site OK: 1 hosts found, 0.0s time"
+    And the message should be "Site OK: 1 hosts found, 0.0s time | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 0
 
-  Scenario: Form based login failure
+  Scenario: HTTP auth failure
     Given one server which requires header based login
     When check-site is run with config "default"
     Then all servers should receive page requests
-    And the message should be "Site CRITICAL: 1 hosts found, 1 errors (500), 0.0s time"
+    And the message should be "Site CRITICAL: 1 hosts found, 1 errors (500), 0.0s time | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 2

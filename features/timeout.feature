@@ -28,7 +28,7 @@ Feature: Handle timeout correctly
     Given one server which responds in 0 seconds
     When check-site is run with config "default"
     Then all servers should receive page requests
-    And the message should be "Site OK: 1 hosts found, 0.0s time"
+    And the message should be "Site OK: 1 hosts found, 0.0s time | time=0.0s;2.0;4.0;0.0;10.0"
     And the status should be 0
 
   Scenario: Timeout expires
