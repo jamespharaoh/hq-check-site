@@ -32,7 +32,7 @@ Feature: Handle timeout correctly
     And the status should be 0
 
   Scenario: Timeout expires
-    Given one server which responds in 0 seconds
+    Given one server which really responds in 1 seconds
     When check-site is run with config "timeout"
     And the message should be "Site CRITICAL: 1 hosts found, 1 uncontactable"
     And the status should be 2

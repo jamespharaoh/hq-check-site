@@ -18,6 +18,22 @@ Given /^(?:one|another) server which responds in (\d+) seconds?$/ do
 
 end
 
+Given /^one server which really responds in (\d+) seconds$/ do
+	|time_str|
+
+	server = {
+		address: next_server_ip,
+		request_count: 0,
+		response_code: "200",
+		response_time: time_str.to_i,
+		response_body: "",
+		sleep_time: time_str.to_i,
+	}
+
+	$servers[server[:address]] = server
+
+end
+
 Given /^(?:one|another) server which responds with "(.*?)"$/ do
 	|response_str|
 

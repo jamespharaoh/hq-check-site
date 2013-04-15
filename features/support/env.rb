@@ -117,6 +117,10 @@ $web_server.mount_proc "/page" do
 
 	end
 
+	if server[:sleep_time]
+		sleep server[:sleep_time]
+	end
+
 	$time += server[:response_time]
 
 	response.status = server[:response_code]
